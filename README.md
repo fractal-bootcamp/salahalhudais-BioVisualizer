@@ -1,6 +1,6 @@
 # Cellular Automata & Particle Simulations
 
-This project demonstrates two simulations:
+This project, inspired by: https://par.nsf.gov/servlets/purl/10486331 showcases two simulations:
 
 
 ![Image of the Visualizers](public/BioVisualizer.png "Visualization")

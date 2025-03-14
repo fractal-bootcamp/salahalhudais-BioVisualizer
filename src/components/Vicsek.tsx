@@ -1,4 +1,5 @@
 import { FC, useState, useEffect, useRef } from 'react';
+import '../App.css';
 
 interface Particle {
   position: [number, number];
@@ -92,13 +93,16 @@ const Vicsek: FC = () => {
   // Setup canvas and initial particles
   useEffect(() => {
     if (canvasRef.current) {
-      const canvas = canvasRef.current;
-      const width = window.innerWidth * 0.8;
-      const height = 500;
+      // Get container width
+      const containerWidth = canvasRef.current.parentElement?.clientWidth || 650;
+      const availableWidth = containerWidth - 60; // Account for padding
       
-      // Set canvas size
-      canvas.width = width;
-      canvas.height = height;
+      // Set canvas dimensions
+      const width = availableWidth;
+      const height = Math.min(600, width * 0.75); // Increased height, maintain aspect ratio
+      
+      canvasRef.current.width = width;
+      canvasRef.current.height = height;
       
       // Update refs
       widthRef.current = width;
@@ -108,7 +112,7 @@ const Vicsek: FC = () => {
       particlesRef.current = initializeParticles(100, width, height);
       
       // Draw initial state
-      const ctx = canvas.getContext('2d');
+      const ctx = canvasRef.current.getContext('2d');
       if (ctx) {
         ctx.clearRect(0, 0, width, height);
         ctx.fillStyle = '#f0f0f0';
@@ -155,7 +159,7 @@ const Vicsek: FC = () => {
       
       // Clear canvas
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = '#f0f0f0';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
       ctx.fillRect(0, 0, width, height);
       
       // Update particles based on Vicsek model
@@ -200,8 +204,8 @@ const Vicsek: FC = () => {
         
         // Draw particle
         ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI * 2);
-        ctx.fillStyle = '#FF4500';
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#2c3e50';
         ctx.fill();
         
         // Draw direction line
@@ -225,56 +229,56 @@ const Vicsek: FC = () => {
   }, [radius, speed, noise]);
 
   return (
-    <div className="vicsek-container" style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h2>Vicsek Model Simulation</h2>
+    <div className="vicsek-container">
+      <div className="title">
+        <h2>Vicsek Model Simulation</h2>
+        <p>Watch particles align with their neighbors to create flocking behavior</p>
+      </div>
       
-      <canvas 
-        ref={canvasRef} 
-        style={{ 
-          border: '2px solid #333',
-          borderRadius: '4px',
-          marginBottom: '20px'
-        }}
-      />
+      <div className="canvas-container">
+        <canvas ref={canvasRef}></canvas>
+      </div>
       
-      <div style={{ width: '80%', maxWidth: '500px' }}>
-        <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>
-            Interaction Radius: {radius}
-          </label>
+      <div className="controls">
+        <div className="slider-control">
+          <label>Interaction Radius: {radius}</label>
           <input 
             type="range" 
             min="10" max="100" 
             value={radius} 
-            onChange={e => setRadius(Number(e.target.value))}
-            style={{ width: '100%' }}
+            onChange={e => setRadius(Number(e.target.value))} 
           />
         </div>
         
-        <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>
-            Speed: {speed}
-          </label>
+        <div className="slider-control">
+          <label>Speed: {speed}</label>
           <input 
             type="range" 
             min="1" max="5" step="0.1"
             value={speed} 
-            onChange={e => setSpeed(Number(e.target.value))}
-            style={{ width: '100%' }}
+            onChange={e => setSpeed(Number(e.target.value))} 
           />
         </div>
         
-        <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>
-            Noise: {noise.toFixed(2)}
-          </label>
+        <div className="slider-control">
+          <label>Noise: {noise.toFixed(2)}</label>
           <input 
             type="range" 
             min="0" max="0.5" step="0.01"
             value={noise} 
-            onChange={e => setNoise(Number(e.target.value))}
-            style={{ width: '100%' }}
+            onChange={e => setNoise(Number(e.target.value))} 
           />
+        </div>
+      </div>
+      
+      <div className="legend">
+        <div className="legend-item">
+          <div className="legend-color" style={{backgroundColor: '#2c3e50'}}></div>
+          <span>Particle</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-color" style={{backgroundColor: '#0066FF'}}></div>
+          <span>Direction</span>
         </div>
       </div>
     </div>

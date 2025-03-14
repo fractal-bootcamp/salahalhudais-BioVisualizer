@@ -76,7 +76,7 @@
 }
 
 .container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -89,9 +89,12 @@
 }
 
 .controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 80%;
+  max-width: 600px;
 }
 
 .controls button {
@@ -127,7 +130,6 @@
   height: 15px;
   border: 1px solid #ddd;
 }
-
 
 body {
   margin: 0;
@@ -170,4 +172,252 @@ canvas {
   margin: 0 auto;
   width: 80vw;
   height: 500px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.controls div {
+  margin-bottom: 15px;
+}
+
+.controls label {
+  color: #f0f0f0;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.controls input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Style the legend text too */
+.legend-item span {
+  color: white;
+}
+
+/* Add these new styles - they won't affect your existing styles */
+
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.main-title {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.simulations-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  max-width: 2200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.simulation-panel {
+  flex: 0 0 calc(50% - 15px);
+  min-width: 650px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1350px) {
+  .simulations-container {
+    flex-direction: column;
+  }
+  
+  .simulation-panel {
+    flex: 1 0 auto;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+}
+
+/* Main container */
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Main title */
+.main-title {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Simulations container */
+.simulations-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  max-width: 2200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Simulation panel */
+.simulation-panel {
+  flex: 0 0 calc(50% - 15px);
+  min-width: 650px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Canvas container */
+.canvas-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Canvas element */
+canvas {
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Title styles */
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.title h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.title p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+/* Controls container */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Control buttons */
+.controls button {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.controls button:hover {
+  background-color: #2980b9;
+}
+
+/* Slider controls */
+.slider-control {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.slider-control label {
+  display: block;
+  color: white;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.slider-control input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-item span {
+  color: white;
+}
+
+.legend-color {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #ddd;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 1350px) {
+  .simulations-container {
+    flex-direction: column;
+  }
+  
+  .simulation-panel {
+    flex: 1 0 auto;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
 }

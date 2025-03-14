@@ -1,0 +1,53 @@
+Vicsek Model is a simulation of a system of particles that move in a collective manner.
+Particles are modeled using:
+  {
+    "position": [x, y],
+    "direction": [vx, vy] -> direction
+    "neighbors": [neighbor1, neighbor2, ...] -> list of neighbors
+    "alignment": [alignment1, alignment2, ...] -> list of alignments
+  }
+
+  The simulation is governed by the following rules:
+  - Particles move in a straight line in their current direction
+  - Particles align their direction with the average direction of their neighbors
+  - Particles move at a constant speed
+
+Given a particle, we compute it's position at time t+1 as follows:
+x(t+1) = x(t) + v·cos(θ)
+y(t+1) = y(t) + v·sin(θ)
+
+The direction of the particle is represented as a unit vector.
+Where Vx=cos(θ) and Vy=sin(θ)
+
+The alignment of the particle is the average direction of the particle's neighbors.
+
+Alignment is computed as follows:
+alignment = average(direction of neighbors)
+
+To compute the direction of the particle:
+direction = alignment + noise
+Where alignment is the average of the particle's neighbors and noise is a random vector in [-0.5, 0.5]
+
+Neighbors are any particles within a distance of r
+
+
+Boundary conditions:
+  - Particles are reflected off the boundaries of the system
+  - Particles are wrapped around the boundaries of the system
+    if (x > width) x -= width;
+    if (x < 0) x += width;
+    if (y > height) y -= height;
+    if (y < 0) y += height;
+
+
+
+
+
+
+
+
+
+
+
+
+

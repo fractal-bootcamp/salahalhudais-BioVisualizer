@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+# Cellular Automata & Particle Simulations
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates two fascinating simulations:
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![Image of the Visualizers](public/BioVisualizer.png "Visualization")
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Conway's Game of Life
+
+An implementation of the classic cellular automaton devised by mathematician John Conway. The simulation follows simple rules:
+
+- Any live cell with 2-3 live neighbors survives
+- Any dead cell with exactly 3 live neighbors becomes alive
+- All other cells die or stay dead
+
+Features:
+- Interactive grid where you can toggle cells by clicking
+- Click and drag to "draw" patterns
+- Start/Stop/Reset controls
+- Visual indicators for newly born and dying cells
+- Grid stabilization detection
+
+## Vicsek Model
+
+A particle-based simulation that demonstrates emergent flocking behavior, similar to bird flocks or fish schools. The model shows how local alignment rules can lead to global order.
+
+Features:
+- Adjustable interaction radius between particles
+- Speed control
+- Noise parameter to simulate real-world imperfections
+- Periodic boundary conditions
+- Visual representation of particle positions and directions
+
+## Technologies Used
+
+- React with TypeScript
+- HTML5 Canvas for particle simulation
+- CSS for styling and animations
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Run the development server with `npm start`
+4. Visit `localhost:3000` in your browser

@@ -13,20 +13,16 @@ const Vicsek: FC = () => {
   const [speed, setSpeed] = useState<number>(2);
   const [noise, setNoise] = useState<number>(0.1);
   
-  // Use refs for particles and dimensions to avoid re-renders
   const particlesRef = useRef<Particle[]>([]);
   const widthRef = useRef<number>(200);
   const heightRef = useRef<number>(200);
 
-  // Initialize particles function
   const initializeParticles = (count: number, width: number, height: number): Particle[] => {
     const particles: Particle[] = [];
     for (let i = 0; i < count; i++) {
-      // Create random position
       const x = Math.random() * width;
       const y = Math.random() * height;
       
-      // Create random direction (will be normalized)
       const angle = Math.random() * 2 * Math.PI;
       const dx = Math.cos(angle);
       const dy = Math.sin(angle);
@@ -51,7 +47,6 @@ const Vicsek: FC = () => {
     });
   };
 
-  // Calculate alignment direction
   const calculateAlignment = (neighbors: Particle[]): [number, number] => {
     if (neighbors.length === 0) return [0, 0];
     
@@ -66,15 +61,12 @@ const Vicsek: FC = () => {
     return [sumX / neighbors.length, sumY / neighbors.length];
   };
 
-  // Add noise and normalize direction
   const addNoiseAndNormalize = (direction: [number, number], noiseAmount: number): [number, number] => {
-    // If direction is zero vector, create a random direction
     if (direction[0] === 0 && direction[1] === 0) {
       const angle = Math.random() * 2 * Math.PI;
       return [Math.cos(angle), Math.sin(angle)];
     }
     
-    // Add noise
     const noise: [number, number] = [
       (Math.random() * 2 - 1) * noiseAmount,
       (Math.random() * 2 - 1) * noiseAmount
@@ -85,21 +77,17 @@ const Vicsek: FC = () => {
       direction[1] + noise[1]
     ];
     
-    // Normalize
     const magnitude = Math.sqrt(noisyDirection[0] ** 2 + noisyDirection[1] ** 2);
     return [noisyDirection[0] / magnitude, noisyDirection[1] / magnitude];
   };
 
-  // Setup canvas and initial particles
   useEffect(() => {
     if (canvasRef.current) {
-      // Get container width
       const containerWidth = canvasRef.current.parentElement?.clientWidth || 650;
-      const availableWidth = containerWidth - 60; // Account for padding
+      const availableWidth = containerWidth - 60;
       
-      // Set canvas dimensions
       const width = availableWidth;
-      const height = Math.min(600, width * 0.75); // Increased height, maintain aspect ratio
+      const height = Math.min(600, width * 0.75);
       
       canvasRef.current.width = width;
       canvasRef.current.height = height;
@@ -157,32 +145,24 @@ const Vicsek: FC = () => {
       const currentSpeed = speed;
       const currentNoise = noise;
       
-      // Clear canvas
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
       ctx.fillRect(0, 0, width, height);
       
-      // Update particles based on Vicsek model
       const particles = particlesRef.current;
       const updatedParticles = particles.map(particle => {
-        // Find neighbors
         const neighbors = findNeighbors(particles, particle, currentRadius);
         
-        // Calculate alignment
         const alignment = calculateAlignment(neighbors);
         
-        // Add noise and normalize
         const newDirection = addNoiseAndNormalize(alignment, currentNoise);
         
-        // Update position
         const [x, y] = particle.position;
         const [dx, dy] = newDirection;
         
-        // Apply movement
         let newX = x + dx * currentSpeed;
         let newY = y + dy * currentSpeed;
         
-        // Wrap around edges
         if (newX < 0) newX += width;
         if (newX >= width) newX -= width;
         if (newY < 0) newY += height;
@@ -194,21 +174,17 @@ const Vicsek: FC = () => {
         };
       });
       
-      // Update particles reference
       particlesRef.current = updatedParticles;
       
-      // Draw updated particles
       updatedParticles.forEach(particle => {
         const [x, y] = particle.position;
         const [dx, dy] = particle.direction;
         
-        // Draw particle
         ctx.beginPath();
         ctx.arc(x, y, 6, 0, Math.PI * 2);
         ctx.fillStyle = '#2c3e50';
         ctx.fill();
         
-        // Draw direction line
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(x + dx * 20, y + dy * 20);
@@ -217,7 +193,6 @@ const Vicsek: FC = () => {
         ctx.stroke();
       });
       
-      // Continue animation
       requestRef.current = requestAnimationFrame(animate);
     };
     

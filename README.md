@@ -1,8 +1,6 @@
 # Cellular Automata & Particle Simulations
 
-This project demonstrates two fascinating simulations:
-
-
+This project demonstrates two simulations:
 
 
 ![Image of the Visualizers](public/BioVisualizer.png "Visualization")
